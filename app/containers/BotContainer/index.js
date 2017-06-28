@@ -52,7 +52,7 @@ export class BotContainer extends React.Component { // eslint-disable-line react
     return (
       <div>
         <Helmet
-          title="BotContainer"
+          title="Alpha"
           meta={[
             { name: 'description', content: 'Description of BotContainer' },
           ]}
