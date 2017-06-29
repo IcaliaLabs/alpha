@@ -3,37 +3,39 @@
  * BotHeaderContainer
  *
  */
-
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import makeSelectBotHeaderContainer from './selectors';
-import { deactivateBot, toggleExpandedBot } from './actions'
-import BotHeader from '../../components/BotHeader/'
-export class BotHeaderContainer extends React.Component { // eslint-disable-line react/prefer-dataless-function
+import { deactivateBot, toggleExpandedBot } from './actions';
+import BotHeader from '../../components/BotHeader/';
 
-  render() {
-    let data = this.props.BotHeaderContainer
-    return (
-      <BotHeader name={data.botName}
-        active={data.active}
-        deactivateBot = {this.props._deactivateBot.bind(this)}
-        toggleExpandedBot = {this.props._toggleExpandedBot.bind(this)}/>
-    )
-  }
-}
+const BotHeaderContainer = ({ botHeaderContainer, handleDeactivateBot, handleToggleExpandedBot }) => { // eslint-disable-line react/prefer-dataless-function
+  const data = botHeaderContainer;
+  return (
+    <BotHeader
+      name={data.botName}
+      active={data.active}
+      deactivateBot={handleDeactivateBot}
+      toggleExpandedBot={handleToggleExpandedBot}
+    />
+  );
+};
 
 BotHeaderContainer.propTypes = {
+  botHeaderContainer: PropTypes.object.isRequired,
+  handleDeactivateBot: PropTypes.func.isRequired,
+  handleToggleExpandedBot: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  BotHeaderContainer: makeSelectBotHeaderContainer(),
+  botHeaderContainer: makeSelectBotHeaderContainer(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    _deactivateBot: () => {dispatch(deactivateBot())},
-    _toggleExpandedBot: () => {dispatch(toggleExpandedBot())},
+    handleDeactivateBot: () => { dispatch(deactivateBot()); },
+    handleToggleExpandedBot: () => { dispatch(toggleExpandedBot()); },
   };
 }
 

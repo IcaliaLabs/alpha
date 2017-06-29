@@ -590,5 +590,4 @@ svg:not(:root) {
     visibility: visible;
   }
 }
-
-`
+`;

@@ -1,8 +1,8 @@
 import { injectGlobal } from 'styled-components';
-import * as variables from './customization/styleVariables.js';
+import * as variables from './customization/styleVariables';
 import BotAvatar from './customization/botAvatar.png';
 import LinkIcon from './customization/linkIcon2.svg';
-import {boilerplateCSS} from './customization/boilerplateCSS';
+import { boilerplateCSS } from './customization/boilerplateCSS';
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
 

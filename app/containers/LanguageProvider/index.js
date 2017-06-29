@@ -29,6 +29,10 @@ LanguageProvider.propTypes = {
   children: React.PropTypes.element.isRequired,
 };
 
+LanguageProvider.defaultProps = {
+  locale: '',
+  messages: {},
+};
 
 const mapStateToProps = createSelector(
   makeSelectLocale(),

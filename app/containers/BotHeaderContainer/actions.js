@@ -5,8 +5,8 @@
   });
 
   export const toggleExpandedBot = () => ({
-    type: C.TOGGLE_EXPANDED_BOT
-  })
+    type: C.TOGGLE_EXPANDED_BOT,
+  });
 
   export const deactivateBot = () => ({
     type: C.DEACTIVATE_BOT,

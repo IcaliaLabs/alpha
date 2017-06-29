@@ -7,293 +7,300 @@
 // import styled from 'styled-components';
 import React, { PropTypes } from 'react';
 import {
-  SubmitButton, 
-  SubmitButtonSmall, 
-  SubmitButtonSmallDisabled, 
+  SubmitButton,
+  SubmitButtonSmall,
   UserOptions,
-  ChatLabel
+  ChatLabel,
 } from './styledComponents';
 
 class UserInput extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  static PropTypes = {
-      inputType: PropTypes.object.isRequired,
-      userName: PropTypes.string.isRequired,
-      sendUserMessage: PropTypes.func.isRequired
-    }
+  constructor(props) {
+    super(props);
+    this.tags = [];
+  }
 
-    constructor(props) {
-      super(props)
-      this.tags = []
+  componentDidUpdate() {
+    if (this.texthandleinput) {
+      this.texthandleinput.focus();
     }
+  }
 
-    componentDidUpdate(prevProps, prevState){
-       if (this.text_input) {
-        this.text_input.focus();
-       }
+  handlesendUserMessage(text) {
+    if ((Array.isArray(text) && text.length > 0) || text !== '') {
+      this.props.sendUserMessage(text, this.props.currentBotBubble);
     }
+  }
 
-    render() {
-      let inputType = this._getInputType()
-      let label = this._getLabel()
-      return (
-        <UserOptions>
-          {label}
-          {inputType}
-        </UserOptions>
-      )
+  handlegetLabel() {
+    if (this.props.inputType.label) {
+      return <ChatLabel>{this.props.inputType.label}</ChatLabel>;
     }
+    return '';
+  }
 
-    _sendUserMessage(text){
-      if( (Array.isArray(text) && text.length > 0 ) || text != ""){
-        this.props.sendUserMessage(text, this.props.currentBotBubble)
+  handlegetInputType() {
+    const inputType = this.props.inputType;
+
+    switch (inputType.type) {
+      case 'fieldText': {
+        return this.handlegetFieldText(inputType);
       }
-    }
-
-    _getLabel(){
-      if (this.props.inputType.label) {
-        return <ChatLabel>{this.props.inputType.label}</ChatLabel>
+      case 'select': {
+        return this.handlegetSelect(inputType);
       }
-      return ""
-    }
-
-    _getInputType(){
-      let inputType = this.props.inputType
-
-      switch (inputType.type) {
-        case "fieldText": {
-          return this._getFieldText(inputType);
-        }
-        case "select": {
-          return this._getSelect(inputType);
-        }
-        case "tags": {
-          return this._getTags(inputType);
-        }
-        case "disabledFieldText": {
-          return this._getDisabledFieldText(inputType);
-        }
-        case "endOfConversation": {
-          return this._getEndOfConversation(inputType);
-        }
-        default: {
-          console.log("Non recognizable input type")
-        }
+      case 'tags': {
+        return this.handlegetTags(inputType);
       }
+      case 'disabledFieldText': {
+        return this.handlegetDisabledFieldText(inputType);
+      }
+      case 'endOfConversation': {
+        return this.handlegetEndOfConversation(inputType);
+      }
+      default:
     }
+    return null;
+  }
 
-    _getFieldText(inputType) {
-      return (
-        <article className="qt-chat__field">
-          <input ref={(input) => this.text_input = input }
-            className="qt-chat__input"
-            type="text"
-            placeholder={inputType.placeholder}
-            onKeyPress={this._handleKeyPress.bind(this)}
-            onKeyUp={this._toggleSubmit.bind(this)}
-            autoFocus
-            />
-          {this._getSubmitButton()}
-          {this._getSubmitButtonSmall()}
-        </article>
-      )
-    }
+  handlegetFieldText(inputType) {
+    return (
+      <article className="qt-chat__field">
+        <input
+          ref={(input) => (this.texthandleinput = input)}
+          className="qt-chat__input"
+          type="text"
+          placeholder={inputType.placeholder}
+          onKeyPress={this.handlehandleKeyPress.bind(this)}
+          onKeyUp={this.handletoggleSubmit.bind(this)}
+          autoFocus
+        />
+        {this.handlegetSubmitButton()}
+        {this.handlegetSubmitButtonSmall()}
+      </article>
+    );
+  }
 
-    _restartConvo() {
-      this.props.restartConversation();
-    }
+  handlerestartConvo() {
+    this.props.restartConversation();
+  }
 
-    _getDisabledFieldText(inputType) {
-      return (
-        <article className="qt-chat__field">
-          <input ref={(input) => this.text_input = input }
-            className="qt-chat__input"
-            type="text"
-            placeholder={inputType.placeholder}
-            disabled={true}
-            />
+  handlegetDisabledFieldText(inputType) {
+    return (
+      <article className="qt-chat__field">
+        <input
+          ref={(input) => (this.texthandleinput = input)}
+          className="qt-chat__input"
+          type="text"
+          placeholder={inputType.placeholder}
+          disabled
+        />
 
-          <SubmitButton
-            disabled >
+        <SubmitButton
+          disabled
+        >
             Submit
           </SubmitButton>
-          <SubmitButtonSmall disabled/>
-        </article>
-      )
-    }
+        <SubmitButtonSmall disabled />
+      </article>
+    );
+  }
 
-    _getEndOfConversation(inputType) {
-      return (
-        <article className="qt-chat__field">
-          <input ref={(input) => this.text_input = input }
-            className="qt-chat__input"
-            type="text"
-            placeholder={inputType.placeholder}
-            disabled
-            />
+  handlegetEndOfConversation(inputType) {
+    return (
+      <article className="qt-chat__field">
+        <input
+          ref={(input) => (this.texthandleinput = input)}
+          className="qt-chat__input"
+          type="text"
+          placeholder={inputType.placeholder}
+          disabled
+        />
 
-          <SubmitButton
-            refresh
-            type="button"
-            onClick={this._restartConvo.bind(this)}>
+        <SubmitButton
+          refresh
+          type="button"
+          onClick={this.handlerestartConvo.bind(this)}
+        >
             Restart
           </SubmitButton>
-          <SubmitButtonSmall
-            refresh
-            type="button"
-            onClick={this._restartConvo.bind(this)}>
-          </SubmitButtonSmall>
-        </article>
-      )
-    }
-
-    _getSelect(inputType) {
-      const options = inputType.options.map( ( option, index ) => {
-          return <a key = { index }
-                    className="qt-chat__reply"
-                    onClick={(e) => this._sendUserMessage(option.label) }> {option.label} </a>
-      })
-      return (
-        <article className="qt-chat__field">
-          <div>
-            { options }
-          </div>
-        </article>
-      )
-    }
-
-    _getTags(inputType) {
-      this.tags = []
-      return (
-        <article className="qt-chat__field">
-          <div className="qt-chat__tagsContainer" >
-            <article className="qt-chat__tags" style={{width: (230*this.props.inputType.tags.length)+"px"}}>
-              {inputType.tags.map( (tag, index) => {
-                return (
-                  <div key={index} className="qt-chat__tag" >
-                    <input type="checkbox"
-                           value = {tag.value}
-                           onKeyPress= {this._handleKeyPress.bind(this)}
-                           onClick={this._toggleSubmit.bind(this)}
-                           ref={(checkbox) => this.tags.push(checkbox) } /> <label> { tag.label } </label>
-                  </div>
-                )
-              })}
-              {this._getSubmitButton()}
-            </article>
-          </div>
-          {this._getSubmitButtonSmall()}
-        </article>
-      )
-    }
-
-    _getSubmitButton(){
-      return(
-        <SubmitButton
-          hasTags={this.props.inputType.type == "tags"}
+        <SubmitButtonSmall
+          refresh
           type="button"
-          onClick={this._handleSubmit.bind(this)}
-          disabled={!this.props.canSubmit}>
+          onClick={this.handlerestartConvo.bind(this)}
+        >
+        </SubmitButtonSmall>
+      </article>
+    );
+  }
+
+  handlegetSelect(inputType) {
+    const options = inputType.options.map((option) => (<a
+      tabIndex={0}
+      role="button"
+      key={option.label.replace(/\W/gi, '').toLowerCase()}
+      className="qt-chat__reply"
+      onClick={() => this.handlesendUserMessage(option.label)}
+    > {option.label} </a>));
+    return (
+      <article className="qt-chat__field">
+        <div>
+          { options }
+        </div>
+      </article>
+    );
+  }
+
+  handlegetTags(inputType) {
+    this.tags = [];
+    return (
+      <article className="qt-chat__field">
+        <div className="qt-chat__tagsContainer" >
+          <article className="qt-chat__tags" style={{ width: `${230 * this.props.inputType.tags.length}px` }}>
+            {inputType.tags.map((tag) => (
+              <div key={tag.label.replace(/\W/gi, '').toLowerCase()} className="qt-chat__tag" >
+                <input
+                  type="checkbox"
+                  value={tag.value}
+                  onKeyPress={this.handlehandleKeyPress.bind(this)}
+                  onClick={this.handletoggleSubmit.bind(this)}
+                  ref={(checkbox) => this.tags.push(checkbox)}
+                /> <label htmlFor={tag}> { tag.label } </label>
+              </div>
+                ))}
+            {this.handlegetSubmitButton()}
+          </article>
+        </div>
+        {this.handlegetSubmitButtonSmall()}
+      </article>
+    );
+  }
+
+  handlegetSubmitButton() {
+    return (
+      <SubmitButton
+        hasTags={this.props.inputType.type === 'tags'}
+        type="button"
+        onClick={this.handlehandleSubmit.bind(this)}
+        disabled={!this.props.canSubmit}
+      >
             Submit
         </SubmitButton>
-      )
+    );
+  }
+
+  handlegetSubmitButtonSmall() {
+    return (
+      <SubmitButtonSmall
+        hasTags={this.props.inputType.type === 'tags'}
+        type="button"
+        onClick={this.handlehandleSubmit.bind(this)}
+        disabled={!this.props.canSubmit}
+      />
+    );
+  }
+
+  handlesubmitTextField() {
+    this.props.sendUserMessage(this.texthandleinput.value);
+    this.texthandleinput.value = '';
+  }
+
+  handlesendTags() {
+    const checkedhandletags = this.tags.filter((tag) => (tag && tag.checked));
+
+    if (checkedhandletags.length > 0) {
+      const userMessage = checkedhandletags.map((tag) => tag.value);
+      this.handlesendUserMessage(userMessage);
     }
+  }
 
-    _getSubmitButtonSmall(){
-      return(
-        <SubmitButtonSmall
-          hasTags={this.props.inputType.type == "tags"}
-          type="button"
-          onClick={this._handleSubmit.bind(this)}
-          disabled={!this.props.canSubmit}/>
-      )
+  handlehandleSubmit() {
+    switch (this.props.inputType.type) {
+      case 'tags':
+        this.handlesendTags();
+        this.props.disableSubmit();
+        break;
+      case 'fieldText':
+        this.handlesubmitTextField();
+        this.props.disableSubmit();
+        break;
+      default:
+        break;
     }
+  }
 
-    _submitTextField() {
-      this.props.sendUserMessage(this.text_input.value);
-      this.text_input.value="";
-    }
-
-    _sendTags(){
-      const checked_tags = this.tags.filter( tag => (tag && tag.checked))
-
-      if(checked_tags.length > 0){
-        let userMessage = checked_tags.map(tag => tag.value)
-        this._sendUserMessage(userMessage)
-      }
-    }
-
-    _handleSubmit(){
-      switch (this.props.inputType.type) {
-        case "tags":
-          this._sendTags()
-          this.props.disableSubmit()
-          break;
-        case "fieldText":
-          this._submitTextField()
-          this.props.disableSubmit()
-          break;
-        default:
-          console.log("Unhandled InputType!")
-          break;
-      }
-    }
-
-    _handleKeyPress(e) {
-      let inputType = this.props.inputType
-      if (e.key === 'Enter') {
-        let userMessage = ""
-        switch (inputType.type) {
-          case "optionCards": {
-            return this._getOptionCards(inputType);
-          }
-          case "fieldText": {
-            userMessage = this.text_input.value
-            this.text_input.value = ""
-            this.props.disableSubmit()
-            break;
-          }
-          case "select": {
-            userMessage = this.select_input.value
-            break;
-          }
-          case "tags": {
-            const checked_tags = this.tags.filter( tag => tag && tag.checked)
-            userMessage = checked_tags.map(tag => tag.value)
-            break;
-          }
-          default: {
-            console.log("Non recognizable input type")
-          }
-        }
-        this._sendUserMessage(userMessage)
-      } 
-    }
-
-    _toggleSubmit() {
-      let inputType = this.props.inputType
+  handlehandleKeyPress(e) {
+    const inputType = this.props.inputType;
+    if (e.key === 'Enter') {
+      let userMessage = '';
       switch (inputType.type) {
-        case "fieldText": {
-          if (this.text_input.value.length > 0) {
-            this.props.enableSubmit()
-          } else {
-            this.props.disableSubmit()
-          }
+        case 'optionCards': {
+          return this.handlegetOptionCards(inputType);
+        }
+        case 'fieldText': {
+          userMessage = this.texthandleinput.value;
+          this.texthandleinput.value = '';
+          this.props.disableSubmit();
           break;
         }
-        case "tags": {
-          var checked_tags = this.tags.filter( tag => (tag && tag.checked))
-          if (checked_tags.length > 0){
-            this.props.enableSubmit()
-          } else {
-            this.props.disableSubmit()
-          }
+        case 'select': {
+          userMessage = this.selecthandleinput.value;
           break;
         }
-        default: {
-          console.log("Non recognizable input type")
+        case 'tags': {
+          const checkedhandletags = this.tags.filter((tag) => tag && tag.checked);
+          userMessage = checkedhandletags.map((tag) => tag.value);
+          break;
         }
+        default:
       }
+      this.handlesendUserMessage(userMessage);
     }
+    return null;
+  }
+
+  handletoggleSubmit() {
+    const inputType = this.props.inputType;
+    switch (inputType.type) {
+      case 'fieldText': {
+        if (this.texthandleinput.value.length > 0) {
+          this.props.enableSubmit();
+        } else {
+          this.props.disableSubmit();
+        }
+        break;
+      }
+      case 'tags': {
+        const checkedhandletags = this.tags.filter((tag) => (tag && tag.checked));
+        if (checkedhandletags.length > 0) {
+          this.props.enableSubmit();
+        } else {
+          this.props.disableSubmit();
+        }
+        break;
+      }
+      default:
+    }
+  }
+  render() {
+    const inputType = this.handlegetInputType();
+    const label = this.handlegetLabel();
+    return (
+      <UserOptions>
+        {label}
+        {inputType}
+      </UserOptions>
+    );
+  }
 }
+
+UserInput.propTypes = {
+  restartConversation: PropTypes.func.isRequired,
+  sendUserMessage: PropTypes.func.isRequired,
+  enableSubmit: PropTypes.func.isRequired,
+  disableSubmit: PropTypes.func.isRequired,
+  inputType: PropTypes.object.isRequired,
+  canSubmit: PropTypes.bool.isRequired,
+  currentBotBubble: PropTypes.string.isRequired,
+};
 
 export default UserInput;
