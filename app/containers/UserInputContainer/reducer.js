@@ -6,7 +6,7 @@
 
 import { fromJS } from 'immutable';
 import * as C from './constants';
-import * as StateFormatter from '../../utils/BotMind/StateFormatter';
+import * as StateFormatter from '../../BotMind/StateFormatter';
 
 const initialState = fromJS({
   currentInput: StateFormatter.defaultUserInput(),

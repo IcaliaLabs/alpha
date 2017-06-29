@@ -6,7 +6,7 @@
 
 import { fromJS } from 'immutable';
 import * as C from './constants';
-import recommendationBags from '../../utils/BotMind/recommendationBags';
+import recommendationBags from '../../BotMind/recommendationBags';
 
 const defaultBags = {};
 recommendationBags.forEach((recommendation) => {

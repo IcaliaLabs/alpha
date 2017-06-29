@@ -1,5 +1,5 @@
   import * as C from './constants';
-  import * as StateFormatter from '../../utils/BotMind/StateFormatter';
+  import * as StateFormatter from '../../BotMind/StateFormatter';
 
   export const enableSubmit = () => ({
     type: C.ENABLE_SUBMIT,

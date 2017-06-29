@@ -13,7 +13,7 @@ module.exports = (options) => ({
   }, options.output), // Merge with env dependent settings
   module: {
     loaders: [{
-      test: /\.js$/, // Transform all .js files required somewhere with Babel
+      test: /\.(js|jsx)$/, // Transform all .js files required somewhere with Babel
       loader: 'babel-loader',
       exclude: /node_modules/,
       query: options.babelQuery,
@@ -31,21 +31,27 @@ module.exports = (options) => ({
       loader: 'file-loader',
     }, {
       test: /\.(jpg|png|gif)$/,
-      loaders: [
-        'file-loader',
-        {
-          loader: 'image-webpack-loader',
-          query: {
-            progressive: true,
-            optimizationLevel: 7,
-            interlaced: false,
-            pngquant: {
-              quality: '65-90',
-              speed: 4,
+        loaders: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            query: {
+              mozjpeg: {
+                progressive: true,
+              },
+              optipng: {
+                optimizationLevel: 7,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              pngquant: {
+                quality: '65-90',
+                speed: 4,
+              },
             },
           },
-        },
-      ],
+        ],
     }, {
       test: /\.html$/,
       loader: 'html-loader',

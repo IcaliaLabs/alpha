@@ -1,10 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import * as C from './constants';
-import * as StateFormatter from '../../utils/BotMind/StateFormatter';
-import * as RTypes from '../../utils/BotMind/responseTypes';
-import * as BotMind from '../../utils/BotMind/BotMind';
-import Finder from '../../utils/BotMind/Interpreter';
+import * as StateFormatter from '../../BotMind/StateFormatter';
+import * as RTypes from '../../BotMind/responseTypes';
+import * as BotMind from '../../BotMind/BotMind';
+import Finder from '../../BotMind/Interpreter';
 import {
   turnOnBotThinking,
   activateBot,
