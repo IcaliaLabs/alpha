@@ -6,19 +6,16 @@
 
 import React, { PropTypes } from 'react';
 // import styled from 'styled-components';
-import { ExpandSvg } from './ExpandSvg'
-
+import { Header, BotName } from './styledComponents';
 
 class BotHeader extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
       return (
-        <header className="qt-chat__header">
+        <Header>
           <span />
-          <h2 className={"qt-chat__nameBot" + (this.props.active ? " is-online" : "")}> { this.props.name }</h2>
-          <a className="qt-chat__controlWindow is-fullscreen" href="javascript::;" onClick={this.props.toggleExpandedBot}>
-            {/*<ExpandSvg/>*/}
-          </a>
-        </header>
+          <BotName isOnline={this.props.active}> { this.props.name }</BotName>
+          <span/>
+        </Header>
       )
     }
 }

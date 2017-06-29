@@ -81,7 +81,7 @@ const questions = {
 		],
 	},
 	mediaBubbles1:{
-		botPrompt: "I can also share images and animated GIFs like so:",
+		botPrompt: "I can also share <strong>images and animated GIFs</strong> like so:",
 		answers: [
 			{nextId: "mediaBubbles2"}
 		],
@@ -96,7 +96,7 @@ const questions = {
 		]
 	},
 	select:{
-		botPrompt: "I can also offer predefined options to choose from:",
+		botPrompt: "I can also offer <strong>predefined options</strong> to choose from:",
 		varName: "userName",
 		input: selectField(["Dope!", "Cool!"]),
 		answers: [
@@ -104,7 +104,7 @@ const questions = {
 		],
 	},
 	tags:{
-		botPrompt: "Or even allow users to select many tags to form an answer:",
+		botPrompt: "Or even <strong>allow users to select many tags</strong> to form an answer:",
 		varName: "userName",
 		input: tagsField(["Do go on..", "Amazing!", "I'm loving this!", "🍕"]),
 		answers: [

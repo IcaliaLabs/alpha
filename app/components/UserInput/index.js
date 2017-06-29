@@ -5,8 +5,14 @@
 */
 
 // import styled from 'styled-components';
-
 import React, { PropTypes } from 'react';
+import {
+  SubmitButton, 
+  SubmitButtonSmall, 
+  SubmitButtonSmallDisabled, 
+  UserOptions,
+  ChatLabel
+} from './styledComponents';
 
 class UserInput extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static PropTypes = {
@@ -30,14 +36,10 @@ class UserInput extends React.Component { // eslint-disable-line react/prefer-st
       let inputType = this._getInputType()
       let label = this._getLabel()
       return (
-        <section className="qt-chat__userOptions" >
-
+        <UserOptions>
           {label}
           {inputType}
-
-          
-
-        </section>
+        </UserOptions>
       )
     }
 
@@ -49,20 +51,15 @@ class UserInput extends React.Component { // eslint-disable-line react/prefer-st
 
     _getLabel(){
       if (this.props.inputType.label) {
-        return <h4 className="qt-chat__label">{this.props.inputType.label}</h4>
+        return <ChatLabel>{this.props.inputType.label}</ChatLabel>
       }
-
       return ""
     }
-
 
     _getInputType(){
       let inputType = this.props.inputType
 
       switch (inputType.type) {
-        case "optionCards": {
-          return this._getOptionCards(inputType);
-        }
         case "fieldText": {
           return this._getFieldText(inputType);
         }
@@ -82,25 +79,6 @@ class UserInput extends React.Component { // eslint-disable-line react/prefer-st
           console.log("Non recognizable input type")
         }
       }
-    }
-
-    _getOptionCards(inputType) {
-      const optionsCards = inputType.optionCards
-      return optionsCards.map( (optionCard, index) => {
-        return (
-          <article key={index} className="qt-chat__optionCard" onClick={this._sendUserMessage.bind(this, optionCard.title)} >
-            <div>
-              <h3 className="qt-chat__optionCardTitle">{optionCard.title}</h3>
-            </div>
-            <div>
-              <p>{optionCard.description}</p>
-            </div>
-            <div>
-              <a href="#" className="qt-chat__optionCardLink">Select This</a>
-            </div>
-          </article>
-        )
-      })
     }
 
     _getFieldText(inputType) {
@@ -134,15 +112,11 @@ class UserInput extends React.Component { // eslint-disable-line react/prefer-st
             disabled={true}
             />
 
-          <button className="qt-chat__submit"
-            type="button"
+          <SubmitButton
             disabled >
             Submit
-          </button>
-          <button className="qt-chat__submitSmall"
-            type="button"
-            disabled>
-          </button>
+          </SubmitButton>
+          <SubmitButtonSmall disabled/>
         </article>
       )
     }
@@ -157,15 +131,17 @@ class UserInput extends React.Component { // eslint-disable-line react/prefer-st
             disabled
             />
 
-          <button className="qt-chat__refresh"
+          <SubmitButton
+            refresh
             type="button"
             onClick={this._restartConvo.bind(this)}>
             Restart
-          </button>
-          <button className="qt-chat__refreshSmall"
+          </SubmitButton>
+          <SubmitButtonSmall
+            refresh
             type="button"
             onClick={this._restartConvo.bind(this)}>
-          </button>
+          </SubmitButtonSmall>
         </article>
       )
     }
@@ -212,22 +188,23 @@ class UserInput extends React.Component { // eslint-disable-line react/prefer-st
 
     _getSubmitButton(){
       return(
-        <button className={"qt-chat__submit"+(this.props.canSubmit ? " submitEnabled" : " submitDisabled")}
+        <SubmitButton
+          hasTags={this.props.inputType.type == "tags"}
           type="button"
           onClick={this._handleSubmit.bind(this)}
           disabled={!this.props.canSubmit}>
             Submit
-        </button>
+        </SubmitButton>
       )
     }
 
     _getSubmitButtonSmall(){
       return(
-        <button className={"qt-chat__submitSmall"+((this.props.inputType.type == "tags") ? " for-tags" : "")}
+        <SubmitButtonSmall
+          hasTags={this.props.inputType.type == "tags"}
           type="button"
           onClick={this._handleSubmit.bind(this)}
-          disabled={!this.props.canSubmit}>
-        </button>
+          disabled={!this.props.canSubmit}/>
       )
     }
 
