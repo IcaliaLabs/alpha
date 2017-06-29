@@ -8,6 +8,9 @@ import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import DialogueFromBot from '../DialogueFromBot/'
 import DialogueFromUser from '../DialogueFromUser/'
+import {
+  ConversationWrapper,
+} from './styledComponents';
 // import styled from 'styled-components';
 
 
@@ -19,18 +22,18 @@ class Conversation extends React.Component { // eslint-disable-line react/prefer
       bubbleThinking = this._getBubbleThinking()
     }
     return (
-      <section className="qt-chat__conversation">
+      <ConversationWrapper innerRef={div => this.wrapper = div}>
         {dialogues}
         {bubbleThinking}
 
         <div ref={(el) => { this.messagesEnd = el; }}></div>
-      </section>
+      </ConversationWrapper>
     )
   }
 
   scrollToBottom() {
     const node = ReactDOM.findDOMNode(this.messagesEnd);
-    node.scrollIntoView({behavior: "smooth"});
+    node.scrollIntoView({behavior: "smooth", true});
   }
 
   componentDidMount() {
@@ -38,7 +41,7 @@ class Conversation extends React.Component { // eslint-disable-line react/prefer
   }
 
   componentDidUpdate() {
-    this.scrollToBottom();
+    setTimeout(() => {this.scrollToBottom();}, 100);
   }
 
   _getBubbleThinking(){
