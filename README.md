@@ -1,6 +1,6 @@
 # **Alpha**
 ### ***Craft your own (fully customizable) web-based chatbot***
-####**Check out our [live demo](https://try-alpha.herokuapp.com)**
+#### **Check out our [live demo](https://try-alpha.herokuapp.com)**
 Alpha is a bot, or rather a base to craft your own web-based **chatbot**.
 We started this project because we think chatbots can be super helpful and quite fun, however the current state of affairs has most chatbots limited to existing messaging platforms such as Facebook, which is quite OK, **but what if you want your bot to live elsewhere on the web**?
 
