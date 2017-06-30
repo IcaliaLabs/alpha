@@ -200,8 +200,11 @@ class UserInput extends React.Component { // eslint-disable-line react/prefer-st
   }
 
   handlesubmitTextField() {
-    this.props.sendUserMessage(this.texthandleinput.value);
+    // this.props.sendUserMessage(this.texthandleinput.value);
+    let userMessage = '';
+    userMessage = this.texthandleinput.value;
     this.texthandleinput.value = '';
+    this.handlesendUserMessage(userMessage);
   }
 
   handlesendTags() {
