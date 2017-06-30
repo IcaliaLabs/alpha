@@ -2,7 +2,7 @@
 ![Alpha ChatBot](https://s3.amazonaws.com/icalialabs/alpha/alpha-01.png)
 ### ***Craft your own (fully customizable) web-based chatbot***
 #### **Check out our [live demo](https://try-alpha.herokuapp.com)**
-#### **Real life implementation as Icalia Labs Virtual Sales Assisstant [here](quotient.icalialabs.com)**
+#### **Real life implementation as [Icalia Labs](http://www.icalialabs.com) Virtual Sales Assisstant [here](http://quotient.icalialabs.com)**
 Alpha is a bot, or rather a base to craft your own web-based **chatbot**.
 We started this project because we think chatbots can be super helpful and quite fun, however the current state of affairs has most chatbots limited to existing messaging platforms such as Facebook, which is quite OK, **but what if you want your bot to live elsewhere on the web**?
 
@@ -12,12 +12,7 @@ You can build your own bot and **define your own visual styles and rules** as we
 ### **Table of Contents**
 
  1. [Installation](https://github.com/IcaliaLabs/alpha#installation)
-		 a) [Development](https://github.com/IcaliaLabs/alpha#development)
-		 b) [Production](https://github.com/IcaliaLabs/alpha#production)
-		 c) [Without Docker](https://github.com/IcaliaLabs/alpha#without-docker)
  2. [Customizing the Dialogue](https://github.com/IcaliaLabs/alpha#customizing-the-dialogue)
-		 a) [The BotMind](https://github.com/IcaliaLabs/alpha#the-botmind) 
-		 b) [BotMindFlows and Dialogue Bubbles](https://github.com/IcaliaLabs/alpha#the-botmindflows)
  3. [Making Recommendations](https://github.com/IcaliaLabs/alpha#making-recommendations-to-users-choose-dialogue-path-based-on-accumulated-dialogue-history)
  4. [Customizing the UI](https://github.com/IcaliaLabs/alpha#customizing-the-ui)
  5. [Customizing the React app](https://github.com/IcaliaLabs/alpha#customizing-the-react-app)
