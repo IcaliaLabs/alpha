@@ -20,6 +20,7 @@ export const userAvatar = '#529aff';
 export const userAvatarTextColor = '#fff';
 export const botAvatar = primaryColor;
 export const botAvatarTextColor = '#fff';
+export const botAvatarIcon = 'https://s3.amazonaws.com/icalialabs/alpha/botAvatar.png';
 
 // ---Bubbles/Dialogues/Badges Colors---//
 export const bubbleTextColorBot = 'black';

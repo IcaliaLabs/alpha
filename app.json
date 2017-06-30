@@ -1,0 +1,7 @@
+{
+  "name": "Alpha Sample",
+  "description": "An example of the Alpha chatbot framework",
+  "repository": "https://github.com/IcaliaLabs/alpha",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "express", "static"]
+}

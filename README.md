@@ -1,6 +1,8 @@
+[![Made with Love by Icalia Labs](https://img.shields.io/badge/With%20love%20by-Icalia%20Labs-ff3434.svg)](https://github.com/IcaliaLabs)
 
 ![Alpha ChatBot](https://s3.amazonaws.com/icalialabs/alpha/alpha-01.png)
 ### ***Craft your own (fully customizable) web-based chatbot***
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 #### **Check out our [live demo](https://try-alpha.herokuapp.com)**
 #### **Real life implementation as [Icalia Labs](http://www.icalialabs.com) Virtual Sales Assisstant [here](http://quotient.icalialabs.com)**
 Alpha is a bot, or rather a base to craft your own web-based **chatbot**.
