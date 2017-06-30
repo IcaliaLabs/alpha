@@ -3,5 +3,16 @@
   "description": "An example of the Alpha chatbot framework",
   "repository": "https://github.com/IcaliaLabs/alpha",
   "logo": "https://node-js-sample.herokuapp.com/node.png",
-  "keywords": ["node", "express", "static"]
+  "keywords": ["node", "react", "webpack"],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs#v106"
+    }
+  ],
+  "env": {
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "NPMs env",
+      "generator": false
+    },
+  },
 }
