@@ -2,12 +2,29 @@
 ![Alpha ChatBot](https://s3.amazonaws.com/icalialabs/alpha/alpha-01.png)
 ### ***Craft your own (fully customizable) web-based chatbot***
 #### **Check out our [live demo](https://try-alpha.herokuapp.com)**
+#### **Real life implementation as Icalia Labs Virtual Sales Assisstant [here](quotient.icalialabs.com)**
 Alpha is a bot, or rather a base to craft your own web-based **chatbot**.
 We started this project because we think chatbots can be super helpful and quite fun, however the current state of affairs has most chatbots limited to existing messaging platforms such as Facebook, which is quite OK, **but what if you want your bot to live elsewhere on the web**?
 
 You can build your own bot and **define your own visual styles and rules** as well as have **unlimited control for customization and logic**. Various solutions already exist, but they can be limiting, costly and hard to implement.
 
 ***This is where Alpha comes handy.*** This library is designed to let you build your own bot in a very simple way. You just have to **1) Download, 2) Insert your own Q&A tree, 3) Insert your own colors and images**. Alpha takes care of the whole UI rendering and handling of the *application state*. **You don't really need to know any React** (or Javascript for that matter). However, if you know your way around React and Redux you can further customize the rendering of the bot-app, and even **connect it to any back-end or AI engine of your choice.** 
+### **Table of Contents**
+
+ 1. [Installation](https://github.com/IcaliaLabs/alpha#installation)
+		 a) [Development](https://github.com/IcaliaLabs/alpha#development)
+		 b) [Production](https://github.com/IcaliaLabs/alpha#production)
+		 c) [Without Docker](https://github.com/IcaliaLabs/alpha#without-docker)
+ 2. [Customizing the Dialogue](https://github.com/IcaliaLabs/alpha#customizing-the-dialogue)
+		 a) [The BotMind](https://github.com/IcaliaLabs/alpha#the-botmind) 
+		 b) [BotMindFlows and Dialogue Bubbles](https://github.com/IcaliaLabs/alpha#the-botmindflows)
+ 3. [Making Recommendations](https://github.com/IcaliaLabs/alpha#making-recommendations-to-users-choose-dialogue-path-based-on-accumulated-dialogue-history)
+ 4. [Customizing the UI](https://github.com/IcaliaLabs/alpha#customizing-the-ui)
+ 5. [Customizing the React app](https://github.com/IcaliaLabs/alpha#customizing-the-react-app)
+ 6. [Sending Emails (TBD)](Sending%20Emails%20%28TBD%29)
+ 7. [Connecting to any Back-End (TBD)](Connecting%20to%20any%20Back-End%20%28TBD%29)
+ 8. [Connecting to AI Engines (TBD)](https://github.com/IcaliaLabs/alpha#connecting-to-ai-engines-tbd)
+ 
 ## **Installation**
 Alpha is built to run on **[Docker](https://www.google.com.mx/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwisgvjWuOTUAhVFQiYKHUTRB84QFggmMAA&url=https://www.docker.com/&usg=AFQjCNHuzQZ0w4cpXaM93txh2HBVWjeFaA)**. However you can run it locally as long as you have **[NodeJS](https://nodejs.org)** as well as **[npm](https://www.google.com.mx/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwju9_rV3-XUAhXHSyYKHWW0CvwQFggmMAA&url=https%3A%2F%2Fwww.npmjs.com%2F&usg=AFQjCNHcRudvKKNX4eMuQBtERCMyaPp85w)** or **[yarn](https://www.google.com.mx/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwiB-L-tuuTUAhXEyyYKHfXWASsQFggiMAA&url=https://yarnpkg.com/&usg=AFQjCNFroCU9gpWAHS2N0ZdHNYurDzRu_w)** (preferred!) in your system.
 #### **Development**
