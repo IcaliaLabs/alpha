@@ -26,7 +26,7 @@ A couple of important points when running on development mode:
 
 #### **Production**
 
- - **Heroku: **
+ - **Heroku:**
 	 Just run `git push heroku master`. This bot is Heroku-ready!
 
 
