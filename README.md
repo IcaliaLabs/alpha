@@ -1,4 +1,5 @@
-# **Alpha**
+
+![Alpha ChatBot](https://s3.amazonaws.com/icalialabs/alpha/alpha-01.png)
 ### ***Craft your own (fully customizable) web-based chatbot***
 #### **Check out our [live demo](https://try-alpha.herokuapp.com)**
 Alpha is a bot, or rather a base to craft your own web-based **chatbot**.
@@ -49,7 +50,8 @@ If you wish to install and run without Docker you'll have to install all the dep
 
  
 ## **Customizing the Dialogue**
-All the logic behind what the bot says, including the Q&A logic live inside **the BotMind** which lives at `app/BotMind/`. 
+All the logic behind what the bot says, including the Q&A logic live inside **the BotMind** which lives at `app/BotMind/`.
+We call each individual bot or user input as **Bubbles** because they are renderd as such in the chat UI.
 >*In order to customize the dialogue you just need to understand and edit **app/BotMind/_initialBubble.js** and **app/BotMind/BotMindFlows/index.js**.*
 #### **The BotMind**
 The main file for the BotMind is **BotMind.js**, but this file only acts as the collector and exporter of the functions living at **_initialBubble.js**, **_nextBubble.js**, and **_recommendationBubbles.js**.
@@ -145,10 +147,101 @@ Every question hash takes up the following options:
  - **varName ([String])**: If you choose "transformedText" as your input type, you can write `@varName` in the *botPrompt*, which will refer to this option. When the bot renders the message it will look for the variable stored in the *React state* (**see below**) and replace `@varName` for the value of that variable.
 
 ## **Making 'Recommendations' to Users (*choose dialogue path based on accumulated dialogue history*)**
+As mentioned above, you can choose to store some values in the React state, and later on compute a reaction/flow/recommendation based on these values. We call this the Bags System.
+
 #### **The Bags System**
+The concept of the bags system is that we pre-define some "**bags**" which we can fill with "**points**" as the conversation progresses. Finally when you decide to call `shouldEstimateRecommendation: true` on one of your question-answer hashes, **_recommendationBubbles.js** will be called into action to decide what to show next based on how many points each bag has accumulated.
+
+The first step is to define the bags you'll be using at `/app/BotMind/recommendationBags.js`. If you do not define these bags, the bot will work, but won't know what to do when you call `addToBags` or `shouldEstimateRecommendation`. The bags look like this:
+```
+const recommendationBags = [
+	{
+		name: "redWine",
+		defaultValue: 0,
+		goToBubbleId: "redWine_start",
+	},
+	{
+		name: "whiteWine",
+		defaultValue: 0,
+		goToBubbleId: "whiteWine_start",
+	},
+	{
+		name: "roseWine",
+		defaultValue: 0,
+		goToBubbleId: "roseWine_start",
+	},
+]
+
+export default recommendationBags;
+```
+Afterwards you can define when to add using `addToBags` in your question-answer flows, for instance:
+```
+question1:{
+	botPrompt: "Which of these are you having?",
+	input: selectField(["Red Meat", "Sea Food", "Chicken", "Pasta"]),
+	answers: [
+			...
+			{
+				answer: "Red Meat",
+				nextId: "question2",
+				sumToBags:[{name: "redWine", points: 4}, {name: "roseWine", points: 1}]
+			},
+			...
+		]
+	}
+```
+And when you're ready just call `shouldEstimateRecommendation` like this:
+```
+question2:{
+	botPrompt: "What will you serve for dessert?",
+	input: selectField(["Chocolate", ...]),
+	answers: [
+		...
+		{
+			answer: "Chocolate",
+			shouldEstimateRecommendation: true,
+			nextId: null,
+			sumToBags:[{name: "redWine", points: 3}, {name: "whiteWine", points: 1}, {name: "roseWine", points: 2}]
+		},
+		...
+	]
+},
+```
+In this example `_recommendationBubbles.js` will be called, and thus the next bot bubble will probably be the one at `redWine_start`.
+
 ## **Customizing the UI**
-## **Customizing the UI**
-## **Changing React app behavior (refer to RBP documentation)**
+We've taken the liberty to predefine a UI to save you some time.
+
+The vast majority of the Bot's styles are ruled by a single file, `/app/customization/styleVariables.js`, here you can change pretty much all the colors used for all the elements, as well as the background of the UI.
+
+If you wish to make further changes to the UI, you can dig right into the **stylesheet** files. There is a global file at `/app/global-styles.js` and some components or containers have their own `styledComponents.js` files in their respective folders for particular, modular components. These files use [**Styled-Components**](https://www.styled-components.com/), a pretty awesome library for React/ES6 (which is officialy considered as a best-practices aid). These files use Javascript's [tagged template literals](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals) to interpolate JS vars with CSS, but **don't freak out**, these can be treated pretty much as regular CSS/SCSS.
+
+**NOTE - Our intention is to gradually migrate to 100% independent, modularly styled components such as the ones found at `/app/components/UserInput/styledComponents.js` and get rid of pretty much all the code at `/app/global-styles.js`**
+
+If your customization wishes are not satisfied just by fiddling with the CSS of the coponents, you can customize pretty much everything else at your will, but beyond this point you'll have to deal with the React (+Redux) side of the app (**see below**).
+
+## **Customizing the React app**
+The whole React side of Alpha has been refactored taking [this awesome repo as a base](https://github.com/react-boilerplate/react-boilerplate). Leveraging the most well-established best practices for React, namely the use of:
+
+ - Redux
+ - ImmutableJS
+ - Reselect
+ - Redux-Saga
+ - Styled-Components
+ 
+ If you wish to fiddle with the React side of Alpha, then you better take a look at **[these docs](https://github.com/react-boilerplate/react-boilerplate/tree/master/docs)** first.
+
 ## **Sending Emails (TBD)**
+We're sure that you'd like to send automated emails to the Bot's owner and end-users with recap of their conversation or such, and we're working on a way to offer the most flexible and back-end agnostic solution that'll allow to virtually just "Plug & Play".
+
+Right now your best bet is hooking this up to some Node or Express (or Rails 5.1.x) server and leveraging their own mailer solutions. You can take a look at the file `/app/BotMind/BotMailer.js` which we use for our Rails-based implementation, but as of now we have removed all the send-Email logic from the `/app/containers/BotContainer/sagas.js`, so you'd have to write your own sagas.
+
 ## **Connecting to any Back-End (TBD)**
+This bot is based on React + Webpack only, meaning that you should be able to plug it in with any framework, back-end, etc., as long as it works with Webpack. 
+
+At the moment the Bot can seamlessly connect with any API, but you'll have to write down your own action creators and sagas to get your desired behavior.
+
+We'll add documentation here along the way as we adapt this bot for different implementations.
+
 ## **Connecting to AI Engines (TBD)**
+Same as above, we intend to allow this bot to connect to other Artificial Intelligence Engines such as [Api.ai](https://api.ai/) and [IBM's Watson](https://www.ibm.com/watson/) in order to enhance interactions. This is one of our top to-do's.
