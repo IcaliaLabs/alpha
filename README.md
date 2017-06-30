@@ -46,7 +46,8 @@ If you wish to install and run without Docker you'll have to install all the dep
 ## **Customizing the Dialogue**
 All the logic behind what the bot says, including the Q&A logic live inside **the BotMind** which lives at `app/BotMind/`:
 #### **The BotMind**
-The main file for the BotMind is **BotMind.jsx**
+The main file for the BotMind is **BotMind.js**, but this file only acts as the collector and exporter of the functions living at **_initialBubble.js**, **_nextBubble.js**, and **_recommendationBubbles.js**.
+These three files in turn carry out their logic based on the Q&A trees that live inside `app/BotMind/BotMindFlows/`.
 ## **Customizing the UI**
 ## **Changing React app behavior (refer to RBP documentation)**
 ## **Sending Emails (TBD)**
