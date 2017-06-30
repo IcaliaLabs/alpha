@@ -18,7 +18,7 @@ Alpha takes care of the whole UI rendering and handling of the *application stat
 ## **Installation**
 Alpha is built to run on **[Docker](https://www.google.com.mx/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwisgvjWuOTUAhVFQiYKHUTRB84QFggmMAA&url=https://www.docker.com/&usg=AFQjCNHuzQZ0w4cpXaM93txh2HBVWjeFaA)**. However you can run it locally as long as you have **[NodeJS](https://nodejs.org)** as well as **npm** or **[yarn](https://www.google.com.mx/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwiB-L-tuuTUAhXEyyYKHfXWASsQFggiMAA&url=https://yarnpkg.com/&usg=AFQjCNFroCU9gpWAHS2N0ZdHNYurDzRu_w)** (preferred!) in your system.
 #### **Development**
-To install and run in your computer just run the following commands in your terminal. You'll need to have Docker installed (See below for instructions witout docker):
+To install and run in your computer just run the following commands in your terminal. You'll need to have Docker installed (See below for instructions without docker):
 
  1.  Clone this repo:  `git clone https://github.com/IcaliaLabs/alpha.git`
  2. Navigate into directory: `cd alpha` 
