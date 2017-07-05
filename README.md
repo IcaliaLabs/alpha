@@ -94,7 +94,7 @@ const questions = {
 export default questions;
 ```
 Each time the BotMind analyses where to go (inside `_nextBubble.js`) it expects to find a hash of questions inside `app/BotMind/BotMindFlows/index.js`. Questions is made up of... you guessed it, individual question-answer hashes. Here you can start laying down the logic and the flow of the conversation. For instance [in our demo](https://try-alpha.herokuapp.com) you'll find the following:
-```
+```javascript
 const questions = {
 	start:{
 		botPrompt: "Hello Human, my name is <strong>Alpha</strong>, I am an awesome <strong>chatbot</strong>",
