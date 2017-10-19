@@ -1,17 +1,17 @@
 class Patterns {
   static forName() {
     return [
-      /My\s+name\s+is\s+(\w+)/i,
-      /I\s+am\s+(\w+)/i,
-      /I'm\s+(\w+)/i,
-      /Im\s+(\w+)/i,
-      /This\s+is\s+(\w+)/i,
-      /(hello|hi|hey)\W?\s+My\s+name\s+is\s+(\w+)/i,
-      /(hello|hi|hey)\W?\s+I\s+am\s+(\w+)/i,
-      /(hello|hi|hey)\W?\s+I'm\s+(\w+)/i,
-      /(hello|hi|hey)\W?\s+Im\s+(\w+)/i,
-      /(hello|hi|hey)\W?\s+This\s+is\s+(\w+)/i,
-      /(?!^hello$|^hi$|^hey$)\s*(\w+)/i,
+      /My\s+name\s+is\s+([A-zÁ-ÿ]+)/i,
+      /I\s+am\s+([A-zÁ-ÿ]+)/i,
+      /I'm\s+([A-zÁ-ÿ]+)/i,
+      /Im\s+([A-zÁ-ÿ]+)/i,
+      /This\s+is\s+([A-zÁ-ÿ]+)/i,
+      /(hello|hi|hey)\W?\s+My\s+name\s+is\s+([A-zÁ-ÿ]+)/i,
+      /(hello|hi|hey)\W?\s+I\s+am\s+([A-zÁ-ÿ]+)/i,
+      /(hello|hi|hey)\W?\s+I'm\s+([A-zÁ-ÿ]+)/i,
+      /(hello|hi|hey)\W?\s+Im\s+([A-zÁ-ÿ]+)/i,
+      /(hello|hi|hey)\W?\s+This\s+is\s+([A-zÁ-ÿ]+)/i,
+      /(?!^hello$|^hi$|^hey$)\s*([A-zÁ-ÿ]+)/i,
     ]
   }
 
@@ -26,7 +26,7 @@ class Patterns {
       /It's\s+called\s+(\.+)/i,
       /Its\s+called\s+(\.+)/i,
       /It\s+is\s+called\s+(\.+)/i,
-      /(?!^it is$|^its$|^it's$)\s*(\w+\s*\w*)/i,
+      /(?!^it is$|^its$|^it's$)\s*([A-zÁ-ÿ]+\s*[A-zÁ-ÿ]*)/i,
     ]
   }
 

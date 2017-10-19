@@ -1,6 +1,5 @@
 import { injectGlobal } from 'styled-components';
 import * as variables from './customization/styleVariables';
-import BotAvatar from './customization/botAvatar.png';
 import LinkIcon from './customization/linkIcon2.svg';
 import { boilerplateCSS } from './customization/boilerplateCSS';
 /* eslint no-unused-expressions: 0 */
@@ -154,7 +153,7 @@ body {
 }
 
 .qt-chat__dialogue.from-bot .qt-avatar {
-  background: url(${BotAvatar}) no-repeat center center ${variables.botAvatar};
+  background: url(${variables.botAvatarIcon}) no-repeat center center ${variables.botAvatar};
   background-size: 50%;
 }
 .qt-chat__dialogue.from-bot .qt-chat__bubble div {
