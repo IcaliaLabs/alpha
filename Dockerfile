@@ -12,8 +12,11 @@ RUN apt-get update && apt-get install -y curl apt-transport-https && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install -y yarn
 
-RUN yarn install
-
 ADD . /usr/src/app
 
+RUN yarn install && \
+    npm run build
+
 EXPOSE 3000
+
+CMD ["npm", "run", "start:prod"]
