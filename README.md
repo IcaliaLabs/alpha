@@ -40,7 +40,8 @@ To install and run in your computer just run the following commands in your term
 
  1.  Clone this repo:  `git clone https://github.com/IcaliaLabs/alpha.git`
  2. Navigate into directory: `cd alpha` 
- 2. Start with Docker: `docker-compose up web`
+ 3. Install dependencies: `docker-compose run --rm alpha yarn install`
+ 4. Then you can lift the server: `docker-compose up alpha`
 
 **That's it!** you should see the demo bot up and running in your browser if you open **[localhost:3000](http://localhost:3000/)*** in your browser.
 
@@ -55,6 +56,15 @@ A couple of important points when running on development mode:
  - **Heroku:**
 	 Just run `git push heroku master`. This bot is Heroku-ready!
 
+ - **Local with Docker:**
+  If you can to compile the image to see how it will behave on
+production, we put a build together as well. Just run:
+
+  ```
+    docker-compose up release
+  ```
+
+It will build the image and lift the production server.
 
 #### **Without Docker**
 If you wish to install and run without Docker you'll have to install all the dependencies directly in your directory:

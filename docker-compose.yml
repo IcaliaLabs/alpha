@@ -1,18 +1,29 @@
-version: '2'
+version: '2.4'
+
 services:
-  web:
-    image: icalialabs/alpha:dev
+  release:
+    image: icalialabs/alpha:release
     build:
       context: .
-      dockerfile: dev.Dockerfile
-    command: yarn start
-    working_dir: /usr/src/app
-    volumes:
-      - .:/usr/src/app
-    stdin_open: true
-    tty: true
+      target: release
     ports:
       - 3000:3000
-    environment: &app_environment
-      PATH: /usr/src/app/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-      NODE_ENV: development
+
+  alpha:
+    image: icalialabs/alpha:development
+    build:
+      context: .
+      target: development
+      args:
+        - DEVELOPER_UID=${UID:-1000}
+        - DEVELOPER_USER=${USER:-you}
+    command: yarn start
+    volumes:
+      - .:/code
+    ports:
+      - 3000:3000
+
+  install:
+    extends:
+      service: alpha
+    command: yarn install

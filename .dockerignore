@@ -1,0 +1,19 @@
+# Ignore version control files:
+.git/
+.gitignore
+
+# Ignore docker and environment files:
+*Dockerfile
+docker-compose*.yml
+**/*.env
+.dockerignore
+
+# Ignore temporary files:
+tmp/
+
+# Ignore OS artifacts:
+**/.DS_Store
+
+# 3: Ignore Development container's Home artifacts:
+# 3.1: Ignore bash / IRB / Byebug history files
+.*_hist*
